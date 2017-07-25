@@ -27,3 +27,4 @@ Route::post('/user/login', 'UserController@postLogin');
 Route::post('/user/logout', 'UserController@logout');
 Route::get('/user/register', 'UserController@register');
 Route::post('/user/register', 'UserController@postRegister');
+Route::post('/user/delete', 'UserController@delete');

@@ -12,6 +12,9 @@ class UserController extends Controller
 
     public function all()
     {
+        if (Auth::user()->type!='Admin') {
+            return view('not-authorized');
+        }
         $all_users = User::all();
         return view('auth/all', compact('all_users'));
     }
@@ -25,6 +28,10 @@ class UserController extends Controller
     {
         if(!Auth::attempt($request->only('email', 'password'))) {
             return redirect(action('UserController@login'));
+        }
+        //TODO redirect admin or business User
+        if (Auth::user()->type=='Admin') {
+            return redirect(action('UserController@all'));
         }
         return Auth::user();
     }
@@ -50,6 +57,10 @@ class UserController extends Controller
         $new_user->type = $request->type;
         $new_user->save();
         return $new_user;
+    }
+
+    public function delete(Request $request) {
+        User::where('id', $request->id)->where('email', $request->email)->delete();
     }
 
 }
