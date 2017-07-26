@@ -12,11 +12,11 @@ class UserController extends Controller
 
     public function all()
     {
-        if (!Auth::user() && Auth::user()->type!='Admin') {
-            return view('not-authorized');
+        if (Auth::user() && Auth::user()->type='Admin') {
+            $all_users = User::all();
+            return view('auth/all', compact('all_users'));
         }
-        $all_users = User::all();
-        return view('auth/all', compact('all_users'));
+        return view('not-authorized');
     }
 
     public function login()
