@@ -66,7 +66,7 @@
                             <div class="col-md-6">
                                 <select name="type" class="form-control" id="user_type">
                                     <option value="Business User">Business User</option>
-                                    <option value="Business User">Admin</option>
+                                    <option value="Admin">Admin</option>
                                 </select>
 
                                 @if ($errors->has('name'))
